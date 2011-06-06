@@ -1,0 +1,3 @@
+django-taggit
+django-allauth
+django_threadedcomments
