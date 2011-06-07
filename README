@@ -1,0 +1,15 @@
+=========
+django_requestly
+=========
+
+Requestly is a web application that allows users to submit, browse and discuss requests.
+
+It is currently under heavy development and not yet ready for production.
+
+For help, you can try @christaggart.
+
+
+About the Project
+=================
+
+Requestly was born to replace the Grails app written to power dataott.org..
