@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+{% load taggit_extras %}
+
+
+{% block content %}
+
+<div class="grid_8 alpha">
+	<h2>Browse Requests</h2>
+
+
+	<ul class="need_list">
+
+
+        {% for request in request_list %}
+				{% get_taglist as tags for 'requests' %}
+		<li class="clearfix">
+
+					<img alt="Gravatar" class="avatar" height="50" src="https://secure.gravatar.com/avatar/4741a843e54c874d54d1cc28bc7ceafb?d=http://static.datato.org/images/default_avatar.png" width="50" />
+
+		  <h5 class="no-bottom"><a href="/requests/{{ request.id }}">{{ request.title }}</a></h5>
+		  <span class="tags"><strong>Tagged:</strong>
+			{% for tag in tags %}
+				<a href="/requests/tag/{{tag.slugify}}">{{tag}}</a>,
+			{% endfor %}
+		  </span>
+		  <p>    {{ request.description }} </p>
+
+		</li>
+           </li>
+        {% endfor %}
+    </ul>
+	[navigation]
+
+	</div>
+	  <div class="grid_4 omega">
+		<h5 class="no-bottom">Sort by:</h5>
+		<ul>
+		  <li><a href="/app/need/index?by=recent">Most Recent</a></li>
+		  <li><a href="/app/need/index?by=support">Most Support</a></li>
+		  <li><a href="/app/need/index?by=comments">Most Comments</a></li>
+		  <li><a href="/app/need/index?by=contentiousness">Most Contentious</a></li>
+		</ul>
+
+		<h5 class="no-bottom">Top 10 Tags:</h5>
+		<ol>
+
+			<li><a href="/app/tag/show/recreation">recreation</a></li>
+
+			<li><a href="/app/tag/show/property">property</a></li>
+
+			<li><a href="/app/tag/show/parking">parking</a></li>
+
+			<li><a href="/app/tag/show/air+photos">air photos</a></li>
+
+			<li><a href="/app/tag/show/imagery">imagery</a></li>
+
+			<li><a href="/app/tag/show/testing+apps4ottawa">testing apps4ottawa</a></li>
+
+			<li><a href="/app/tag/show/dem">dem</a></li>
+
+			<li><a href="/app/tag/show/bicycle+ocp">bicycle ocp</a></li>
+
+			<li><a href="/app/tag/show/granting">granting</a></li>
+
+			<li><a href="/app/tag/show/wards+mapping+shapefile+map">wards mapping shapefile map</a></li>
+
+		</ol>
+	  </div>
+{% endblock %}

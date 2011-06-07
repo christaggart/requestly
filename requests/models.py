@@ -1,5 +1,7 @@
 from django.db import models
 from taggit.managers import TaggableManager
+from django.contrib.auth.models import User
+from datetime import datetime
 
 # Create your models here.
 class Request(models.Model):
@@ -11,13 +13,15 @@ class Request(models.Model):
 	date_created = models.DateTimeField()
 	date_modified = models.DateTimeField()
 	created_by = models.ForeignKey(User)
-	
-	
+
+	def __unicode__(self):
+		return self.title
+
 	def save(self):
-	if self.date_created == None:
-		self.date_created = datetime.now()
-	self.date_modified = datetime.now()
-	super(Request, self).save()
+	    if self.date_created == None:
+		    self.date_created = datetime.now()
+	    self.date_modified = datetime.now()
+	    super(Request, self).save()
 
 	class Admin:
 		list_display = ('',)

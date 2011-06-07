@@ -1,4 +1,4 @@
-# Django settings for dataott project.
+# Django settings for requestly project.
 
 import os
 
@@ -71,7 +71,7 @@ ADMIN_MEDIA_PREFIX = '/static/admin/'
 
 # Additional locations of static files
 STATICFILES_DIRS = (
-	"F:/dev2/django/dataott/requests/static",
+	os.path.join(os.getcwd(), "static"),
     # Put strings here, like "/home/html/static" or "C:/www/django/static".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
@@ -113,7 +113,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
 )
 
-ROOT_URLCONF = 'dataott.urls'
+ROOT_URLCONF = 'requestly.urls'
 
 
 AUTHENTICATION_BACKENDS = (
@@ -135,7 +135,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'taggit',
-    
+    'taggit_templatetags',
     'emailconfirmation',
     'uni_form',
 
@@ -148,6 +148,7 @@ INSTALLED_APPS = (
     # Uncomment the next line to enable the admin:
     'django.contrib.admin',
     'south',
+    'requests',
 
 )
 

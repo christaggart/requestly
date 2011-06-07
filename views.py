@@ -4,5 +4,5 @@ from django.template.response import TemplateResponse
 
 import datetime
 
-def home(request):	
+def home(request):
 	return TemplateResponse(request, 'home.html', {'entries': ''})

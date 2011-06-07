@@ -1,0 +1,110 @@
+{% extends "base.html" %}
+{% load taggit_extras %}
+
+
+{% block content %}
+<div class="grid_8 alpha">
+
+     <div class="hpad border-bottom">
+	<h1 class="no-bottom no-top">{{object.title}}</h1>
+	<p class="request_meta clearfix">
+			<img alt="Gravatar" class="avatar" height="50" src="https://secure.gravatar.com/avatar/4741a843e54c874d54d1cc28bc7ceafb?d=http://static.datato.org/images/default_avatar.png" width="50" />
+
+	<strong>Requested By:</strong> {{object.created_by.first_name}} {{object.created_by.last_name}}
+	<br/><strong>Tagged:</strong>
+
+	  <a href="/app/tag/show/fire+hydrants">fire hydrants</a>,
+
+	  <a href="/app/tag/show/insurance">insurance</a>,
+
+	  <a href="/app/tag/show/actuary">actuary</a>
+
+	</p>
+     </div>
+     <div class="clearfix">
+	<p> {{ object.description}}</p>
+
+     </div>
+     <div id="comments">
+
+
+	<ul class="comments">
+
+	</ul>
+
+	<a name="commentform"></a>
+	<h5>Add a comment</h5>
+
+	<p>Remain <strong>anonymous</strong> | <a href="/app/login/index">Sign in</a> | <a href="/app/register/index">Register</a></p>
+	<form action="/app/needComment/save" method="post" >
+	  <input type="hidden" name="needId" value="53"/>
+	  <p><textarea name="body" id="body" cols="60" rows="10"></textarea></p>
+
+
+	    <p><strong>Please enter the code:</strong><br/>
+	      <input type="text" name="captcha" size="8" style="float: left; margin-right: 5px;"/>
+	      <img src="/app/captcha/index" align="absmiddle" style="float: left"/></p>
+	    <br clear="all"/>
+
+
+	  <p><button type="submit" class="btn_comment">Post Your Comment</button></p>
+	</form>
+     </div>
+   </div>
+
+
+   <div class="grid_4 omega">
+     <div class="vpad clearfix">
+	<h5 class="no-bottom no-top">Rate This Request</h5>
+	<p class="no-top">Vote this request up or down to show your support.</p>
+	<div id="support">
+	  <div id="votes" >0</div>
+	</div>
+	<p id="vote_controls" class="clearfix">
+
+	  <a href="/app/login/index">Sign in to&nbsp;vote</a>
+     </p>
+     </div>
+
+
+
+   <script language="javascript">
+	$(function() {
+		$('#upvote').click(function() {
+			$.post('/app/need/upvote/53', function(data, textStatus) {
+				updateTally(data, textStatus)
+			});
+
+			$('#upvote').unbind();
+			$('#downvote').unbind();
+			return false;
+		});
+
+		$('#downvote').click(function() {
+			$.post('/app/need/downvote/53', function(data, textStatus) {
+				updateTally(data, textStatus)
+			});
+
+			$('#upvote').unbind();
+			$('#downvote').unbind();
+			return false;
+		});
+
+		var updateTally = function(data, textStatus) {
+		var tally = $('#votes');
+
+		if (textStatus == 'success') {
+		  tally.html(data);
+		  if (data < 0) {
+			  tally.addClass('negative');
+		  } else {
+			  tally.removeClass('negative');
+		  }
+		  $('#vote_controls').html('Thanks for your vote!');
+		  }
+		}
+	      });
+	</script>
+
+	  </div>
+{% endblock %}
