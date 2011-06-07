@@ -14,12 +14,18 @@ urlpatterns = patterns('',
             model=Request,
             context_object_name="request_list",
             paginate_by=10,
+            allow_empty=True,
         )),
     (r'^requests/(?P<pk>\d+)/$', DetailView.as_view(
             model=Request,
             context_object_name="request_object",
         )),
-
+        
+	# Generic view to vote on Link objects
+    (r'^requests/(?P<pid>\d+)/(?P<direction>up|down|clear)vote/?$',
+        vote_on_object, dict(model=Request, template_object_name='request',
+            template_name='requests/request_confirm_vote.html',
+            allow_xmlhttprequest=True)),
 
     # url(r'^dataott/', include('dataott.foo.urls')),
     # Uncomment the admin/doc line below to enable admin documentation:
